@@ -1,0 +1,175 @@
+/* Global App Styles - Professional Monochrome */
+.app {
+  min-height: 100vh;
+}
+
+/* Button Styles - Minimal */
+.btn {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: #1976d2;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #000;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #4a4a4a;
+}
+
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+.btn-outlined {
+  background: transparent;
+  border: 1px solid #e8e8e8;
+  color: #4a4a4a;
+}
+
+.btn-outlined:hover {
+  background: #f8f8f8;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.btn-text {
+  background: transparent;
+  color: #4a4a4a;
+  padding: 8px 16px;
+}
+
+.btn-text:hover {
+  background: #f8f8f8;
+}
+
+.btn-large {
+  padding: 14px 32px;
+  font-size: 1rem;
+}
+
+.btn-small {
+  padding: 6px 16px;
+  font-size: 0.8rem;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  border: 1px solid #e8e8e8;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: #d0d0d0;
+  transform: translateY(-2px);
+}
+
+/* Input Styles */
+.input {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  padding: 11px 14px;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  background: white;
+  color: #1a1a1a;
+  transition: all 0.15s;
+  width: 100%;
+}
+
+.input:hover {
+  border-color: #d0d0d0;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1a1a1a;
+}
+
+.input::placeholder {
+  color: #999;
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: #f0f0f0;
+  color: #4a4a4a;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease;
+}
+
+.slide-down {
+  animation: slideDown 0.4s ease;
+}

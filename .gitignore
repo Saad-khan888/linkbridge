@@ -1,0 +1,26 @@
+node_modules
+.env
+dist
+
+# Thesis related folders (not for deployment)
+thesis/
+thesis media/
+thesis template/
+
+# Database data folders (local only)
+data/
+mongodb-data/
+
+# Build directories
+client/dist/
+client/build/
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db

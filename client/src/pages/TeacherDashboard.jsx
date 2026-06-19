@@ -7,6 +7,7 @@ import { FileText, Bell, BookOpen, Calendar, Users, User, LogOut, Plus, Trash2, 
 import DeactivatedNotice from '../components/DeactivatedNotice';
 import DirectMessaging from '../components/DirectMessaging';
 import { getDownloadUrl, getFileTypeLabel } from '../utils/fileUtils';
+import API_URL from '../config/api';
 import './Dashboard.css';
 
 const TeacherDashboard = () => {
@@ -50,7 +51,7 @@ const TeacherDashboard = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const newSocket = io('http://localhost:5000', { auth: { token } });
+    const newSocket = io(API_URL, { auth: { token } });
     setSocket(newSocket);
 
     newSocket.on('new-message', (msg) => {
@@ -69,13 +70,13 @@ const TeacherDashboard = () => {
   const fetchData = async () => {
     try {
       if (activeTab === 'chat') {
-        const res = await axios.get('http://localhost:5000/api/messages');
+        const res = await axios.get(`${API_URL}/api/messages`);
         setMessages(res.data);
       } else if (activeTab === 'notices') {
-        const res = await axios.get('http://localhost:5000/api/notices');
+        const res = await axios.get(`${API_URL}/api/notices`);
         setItems(res.data);
       } else if (activeTab !== 'messages') {
-        const res = await axios.get(`http://localhost:5000/api/${activeTab}`);
+        const res = await axios.get(`${API_URL}/api/${activeTab}`);
         setItems(res.data);
       }
     } catch (error) {
@@ -95,7 +96,7 @@ const TeacherDashboard = () => {
         const formDataUpload = new FormData();
         formDataUpload.append('file', file);
 
-        const res = await axios.post('http://localhost:5000/api/upload', formDataUpload, {
+        const res = await axios.post(`${API_URL}/api/upload`, formDataUpload, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
 
@@ -129,7 +130,7 @@ const TeacherDashboard = () => {
       console.log('Creating with data:', dataToSend);
       console.log('Attachments:', formData.attachments);
 
-      await axios.post(`http://localhost:5000/api/${endpoint}`, dataToSend);
+      await axios.post(`${API_URL}/api/${endpoint}`, dataToSend);
       setMessage({ type: 'success', text: 'Created successfully!' });
       setShowModal(false);
       resetForm();
@@ -154,7 +155,7 @@ const TeacherDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this item?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/${activeTab}/${id}`);
+      await axios.delete(`${API_URL}/api/${activeTab}/${id}`);
       setMessage({ type: 'success', text: 'Deleted successfully!' });
       fetchData();
     } catch (error) {

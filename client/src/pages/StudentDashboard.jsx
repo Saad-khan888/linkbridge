@@ -7,6 +7,7 @@ import { FileText, Bell, BookOpen, Calendar, MessageCircle, User, LogOut, Downlo
 import DeactivatedNotice from '../components/DeactivatedNotice';
 import DirectMessaging from '../components/DirectMessaging';
 import { getDownloadUrl, getFileTypeLabel } from '../utils/fileUtils';
+import API_URL from '../config/api';
 import './Dashboard.css';
 
 const StudentDashboard = () => {
@@ -29,7 +30,7 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const newSocket = io('http://localhost:5000', { auth: { token } });
+    const newSocket = io(API_URL, { auth: { token } });
     setSocket(newSocket);
 
     newSocket.on('new-message', (message) => {
@@ -48,22 +49,22 @@ const StudentDashboard = () => {
   const fetchData = async () => {
     try {
       if (activeTab === 'assignments') {
-        const res = await axios.get('http://localhost:5000/api/assignments');
+        const res = await axios.get(`${API_URL}/api/assignments`);
         setAssignments(res.data);
       } else if (activeTab === 'announcements') {
-        const res = await axios.get('http://localhost:5000/api/announcements');
+        const res = await axios.get(`${API_URL}/api/announcements`);
         setAnnouncements(res.data);
       } else if (activeTab === 'materials') {
-        const res = await axios.get('http://localhost:5000/api/materials');
+        const res = await axios.get(`${API_URL}/api/materials`);
         setMaterials(res.data);
       } else if (activeTab === 'events') {
-        const res = await axios.get('http://localhost:5000/api/events');
+        const res = await axios.get(`${API_URL}/api/events`);
         setEvents(res.data);
       } else if (activeTab === 'notices') {
-        const res = await axios.get('http://localhost:5000/api/notices');
+        const res = await axios.get(`${API_URL}/api/notices`);
         setNotices(res.data);
       } else if (activeTab === 'chat') {
-        const res = await axios.get('http://localhost:5000/api/messages');
+        const res = await axios.get(`${API_URL}/api/messages`);
         setMessages(res.data);
       }
     } catch (error) {

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { AlertCircle, LogOut, User, Trash2, RefreshCw } from 'lucide-react';
 import axios from 'axios';
+import API_URL from '../config/api';
 import './DeactivatedNotice.css';
 
 const DeactivatedNotice = () => {
@@ -34,7 +35,7 @@ const DeactivatedNotice = () => {
     }
 
     try {
-      await axios.delete('http://localhost:5000/api/auth/delete-account');
+      await axios.delete(`${API_URL}/api/auth/delete-account`);
       logout();
       navigate('/');
     } catch (error) {

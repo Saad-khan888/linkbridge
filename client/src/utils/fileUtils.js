@@ -1,3 +1,5 @@
+import API_URL from '../config/api';
+
 /**
  * Generates a download URL through backend proxy to preserve filename
  * @param {string} cloudinaryUrl - The original Cloudinary URL
@@ -18,8 +20,7 @@ export const getDownloadUrl = (cloudinaryUrl, filename) => {
   
   // For all other files (PDFs, Word, Excel, ZIP, etc.), use backend proxy
   // This ensures proper filename on download
-  const backendUrl = 'http://localhost:5000';
-  return `${backendUrl}/api/download?url=${encodeURIComponent(cloudinaryUrl)}&filename=${encodeURIComponent(filename)}`;
+  return `${API_URL}/api/download?url=${encodeURIComponent(cloudinaryUrl)}&filename=${encodeURIComponent(filename)}`;
 };
 
 /**

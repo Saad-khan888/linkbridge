@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { ArrowLeft, Edit2, LogOut, Trash2 } from 'lucide-react';
+import API_URL from '../config/api';
 import './Profile.css';
 
 const TeacherProfile = () => {
@@ -24,7 +25,7 @@ const TeacherProfile = () => {
     setMessage({ type: '', text: '' });
     
     try {
-      const res = await axios.put('http://localhost:5000/api/auth/profile', formData);
+      const res = await axios.put(`${API_URL}/api/auth/profile`, formData);
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
       setIsEditing(false);
       window.location.reload();
@@ -35,7 +36,7 @@ const TeacherProfile = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete('http://localhost:5000/api/auth/profile');
+      await axios.delete(`${API_URL}/api/auth/profile`);
       logout();
       navigate('/');
     } catch (error) {

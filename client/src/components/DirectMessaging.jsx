@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { Mail, Send, Users } from 'lucide-react';
+import API_URL from '../config/api';
 import './DirectMessaging.css';
 
 const DirectMessaging = ({ socket }) => {
@@ -74,7 +75,7 @@ const DirectMessaging = ({ socket }) => {
 
   const fetchConversations = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/direct-messages/conversations');
+      const res = await axios.get(`${API_URL}/api/direct-messages/conversations`);
       setConversations(res.data);
     } catch (error) {
       console.error('Error fetching conversations:', error);
@@ -83,7 +84,7 @@ const DirectMessaging = ({ socket }) => {
 
   const fetchAvailableUsers = async (type) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/direct-messages/users/list?type=${type}`);
+      const res = await axios.get(`${API_URL}/api/direct-messages/users/list?type=${type}`);
       setAvailableUsers(prev => ({ ...prev, [type]: res.data }));
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -92,7 +93,7 @@ const DirectMessaging = ({ socket }) => {
 
   const fetchDirectMessages = async (userId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/direct-messages/${userId}`);
+      const res = await axios.get(`${API_URL}/api/direct-messages/${userId}`);
       setDirectMessages(res.data);
     } catch (error) {
       console.error('Error fetching direct messages:', error);

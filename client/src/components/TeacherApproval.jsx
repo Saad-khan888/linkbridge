@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Check, X, User, Mail, Building, Calendar, AlertCircle } from 'lucide-react';
+import API_URL from '../config/api';
 import '../pages/Dashboard.css';
 
 const TeacherApproval = () => {
@@ -18,8 +19,8 @@ const TeacherApproval = () => {
     try {
       setLoading(true);
       const [pendingRes, approvedRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/teachers/pending'),
-        axios.get('http://localhost:5000/api/teachers/approved')
+        axios.get(`${API_URL}/api/teachers/pending`),
+        axios.get(`${API_URL}/api/teachers/approved`)
       ]);
       setPendingTeachers(pendingRes.data);
       setApprovedTeachers(approvedRes.data);
@@ -32,7 +33,7 @@ const TeacherApproval = () => {
 
   const handleApprove = async (teacherId) => {
     try {
-      await axios.put(`http://localhost:5000/api/teachers/${teacherId}/approve`);
+      await axios.put(`${API_URL}/api/teachers/${teacherId}/approve`);
       showMessage('success', 'Teacher approved successfully');
       fetchTeachers();
     } catch (error) {
@@ -46,7 +47,7 @@ const TeacherApproval = () => {
     }
     
     try {
-      await axios.delete(`http://localhost:5000/api/teachers/${teacherId}/reject`);
+      await axios.delete(`${API_URL}/api/teachers/${teacherId}/reject`);
       showMessage('success', 'Teacher request rejected');
       fetchTeachers();
     } catch (error) {
@@ -60,7 +61,7 @@ const TeacherApproval = () => {
     }
     
     try {
-      await axios.put(`http://localhost:5000/api/teachers/${teacherId}/deactivate`);
+      await axios.put(`${API_URL}/api/teachers/${teacherId}/deactivate`);
       showMessage('success', 'Teacher deactivated');
       fetchTeachers();
     } catch (error) {
@@ -70,7 +71,7 @@ const TeacherApproval = () => {
 
   const handleActivate = async (teacherId) => {
     try {
-      await axios.put(`http://localhost:5000/api/teachers/${teacherId}/activate`);
+      await axios.put(`${API_URL}/api/teachers/${teacherId}/activate`);
       showMessage('success', 'Teacher activated');
       fetchTeachers();
     } catch (error) {
